@@ -1,5 +1,6 @@
 const express = require('express')
 const jwt = require('jsonwebtoken');
+var cors = require('cors')
 const { MongoClient, ServerApiVersion ,ObjectId} = require('mongodb');
 const app = express()
 const port =process.env.PORT|| 5000
@@ -9,6 +10,7 @@ app.use(express.json())
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.f7zs7lw.mongodb.net/?retryWrites=true&w=majority`;
+
 
 
 const client = new MongoClient(uri, {
@@ -26,9 +28,14 @@ async function run() {
 
 
 
+    const classesCollections = client.db("classesDB").collection("    classesCollections ");
 
 
 
+app.get('/class',async(req,res)=>{
+    const result= await classesCollections.find().toArray()
+    res.send(result)
+})
 
 
 
