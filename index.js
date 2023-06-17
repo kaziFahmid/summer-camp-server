@@ -131,7 +131,7 @@ async function run() {
           .send({ error: true, message: "forbidden access" });
       }
 
-      const result = await paymentCollections.find().toArray();
+      const result = await paymentCollections.find(query).toArray();
       res.send(result);
     });
 
